@@ -63,8 +63,10 @@ $columnType TEXT
     return await db!.query(_tableName);
   }
 
-  Future<List<Map<String, dynamic>>> querySpecificTable(queriedTable) async {
+  Future<List<Map<String, dynamic>>> querySpecificTable(
+      String queriedTable) async {
     Database? db = await instance.database;
+    print(db!.query(queriedTable));
 
     return await db!.query(queriedTable);
   }

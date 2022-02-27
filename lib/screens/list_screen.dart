@@ -34,7 +34,7 @@ class _ListScreenState extends State<ListScreen> {
         body: Column(
           children: [
             Container(
-              height: 500,
+              height: 300,
               child: FutureBuilder(
                   future: Provider.of<Items>(context, listen: false)
                       .setAndFetchItems(),
@@ -75,17 +75,17 @@ class _ListScreenState extends State<ListScreen> {
                     'type': null
                   });
                 },
-                child: Text('update')),
+                child: Text('query new table')),
             TextButton(
                 onPressed: () async {
-                  DbHelper.instance.delete(5);
+                  DbHelper.instance.querySpecificTable('nowy');
                 },
-                child: Text('delete')),
+                child: Text('query new table')),
             TextButton(
                 onPressed: () async {
-                  DbHelper.instance.items();
+                  DbHelper.instance.createNewTable('nowy');
                 },
-                child: Text('items')),
+                child: Text('create new table')),
           ],
         ),
       ),
