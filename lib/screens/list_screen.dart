@@ -64,7 +64,7 @@ class _ListScreenState extends State<ListScreen> {
                       await DbHelper.instance.queryAll();
                   //print(myTable);
                 },
-                child: Text('query')),
+                child: Text('query all tables')),
             TextButton(
                 onPressed: () async {
                   await DbHelper.instance.update({
@@ -75,12 +75,12 @@ class _ListScreenState extends State<ListScreen> {
                     'type': null
                   });
                 },
-                child: Text('query new table')),
+                child: Text('update')),
             TextButton(
                 onPressed: () async {
-                  DbHelper.instance.querySpecificTable('nowy');
+                  DbHelper.instance.getAllTableNames();
                 },
-                child: Text('query new table')),
+                child: Text('getall names table')),
             TextButton(
                 onPressed: () async {
                   DbHelper.instance.createNewTable('nowy');

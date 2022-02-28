@@ -158,4 +158,29 @@ $columnType TEXT
     // print(item);
     return item;
   }
+  //********* Get all tableName from Database *********//
+
+  Future<List<String>> getAllTableNames() async {
+// you can use your initial name for dbClient
+    final db = await instance.database;
+    List<Map> maps = db != null
+        ? await db.rawQuery('SELECT * FROM sqlite_master ORDER BY name;')
+        : throw (Exception);
+
+    List<String> tableNameList = [];
+    if (maps.length > 0) {
+      for (int i = 0; i < maps.length; i++) {
+        try {
+          tableNameList.add(maps[i]['name'].toString());
+        } catch (e) {
+          print('Exeption : ' + e.toString());
+        }
+      }
+      tableNameList = tableNameList
+          .skipWhile((nazwa) => nazwa.toString() == 'android_metadata')
+          .toList();
+    }
+    print(tableNameList);
+    return tableNameList;
+  }
 }
