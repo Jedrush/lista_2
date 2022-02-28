@@ -158,8 +158,9 @@ $columnType TEXT
     // print(item);
     return item;
   }
-  //********* Get all tableName from Database *********//
 
+  //********* Get all tableName from Database *********//
+  List<String> _tablesNames = [];
   Future<List<String>> getAllTableNames() async {
 // you can use your initial name for dbClient
     final db = await instance.database;
@@ -179,8 +180,15 @@ $columnType TEXT
       tableNameList = tableNameList
           .skipWhile((nazwa) => nazwa.toString() == 'android_metadata')
           .toList();
+      _tablesNames = tableNameList;
     }
-    print(tableNameList);
+    // _tablesNames.addAll(tableNameList);
+    notifyListeners();
+
     return tableNameList;
+  }
+
+  List<String> get tableNames {
+    return _tablesNames;
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lista_2/widgets/list_of_tables_generator.dart';
 import 'package:provider/provider.dart';
 
 import 'package:lista_2/providers/items_provider.dart';
@@ -33,23 +34,22 @@ class _ListScreenState extends State<ListScreen> {
         appBar: AppBar(),
         body: Column(
           children: [
-            Container(
-              height: 300,
-              child: FutureBuilder(
-                  future: Provider.of<Items>(context, listen: false)
-                      .setAndFetchItems(),
-                  builder: (ctx, snapshot) => ListView.builder(
-                      itemBuilder: (context, i) => SingleListItem(
-                          remove: () async {
-                            DbHelper.instance.delete(itemsProvider.items[i].id);
-                          },
-                          productId: itemsProvider.items[i].id,
-                          productName: itemsProvider.items[i].productName),
-                      itemCount: itemsProvider.items.length)
+            Container(height: 300, child: TableNames()
+                // FutureBuilder(
+                //     future: Provider.of<Items>(context, listen: false)
+                //         .setAndFetchItems(),
+                //     builder: (ctx, snapshot) => ListView.builder(
+                //         itemBuilder: (context, i) => SingleListItem(
+                //             remove: () async {
+                //               DbHelper.instance.delete(itemsProvider.items[i].id);
+                //             },
+                //             productId: itemsProvider.items[i].id,
+                //             productName: itemsProvider.items[i].productName),
+                //         itemCount: itemsProvider.items.length)
 
-                  // width: double.infinity,
-                  ),
-            ),
+                //     // width: double.infinity,
+                //     ),
+                ),
             TextButton(
                 onPressed: () async {
                   int i = await DbHelper.instance.insert({
