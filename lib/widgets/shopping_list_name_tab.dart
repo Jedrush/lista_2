@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 
-class ShoppingListNameTAb extends StatelessWidget {
-  const ShoppingListNameTAb({Key? key}) : super(key: key);
+class ShoppingListNameTab extends StatelessWidget {
+  const ShoppingListNameTab(
+      {Key? key, required this.listName, required this.listId})
+      : super(key: key);
+
+  final String listName;
+  final String listId;
 
   @override
   Widget build(BuildContext context) {
@@ -11,12 +16,14 @@ class ShoppingListNameTAb extends StatelessWidget {
     return Row(
       children: [
         CircleAvatar(
-          child: Text('1'),
+          child: Text(listId),
         ),
-        Card(
-          color: Colors.grey,
+        Expanded(
           child: TextButton(
-            child: Text('nazwa listy'),
+            child: Text(
+              listName,
+              style: TextStyle(color: Colors.white),
+            ),
             onPressed: () {},
           ),
         ),

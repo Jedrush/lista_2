@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lista_2/widgets/list_of_tables_generator.dart';
 
 class MainScreenPage extends StatelessWidget {
   const MainScreenPage({Key? key}) : super(key: key);
@@ -18,30 +19,34 @@ class MainScreenPage extends StatelessWidget {
           Card(
             child: Text('Moje listy:'),
           ),
-          Container(
-            color: Colors.blueGrey,
-            height: height / 2,
-            child: ListView.builder(
-              itemCount: 2,
-              itemBuilder: (context, index) => Card(
-                child: Text('moja lista nr $index'),
+          Expanded(
+            child: Container(
+                alignment: Alignment.center,
+                color: Colors.white,
+                child: TableNames()),
+          ),
+          SizedBox(
+            height: 20,
+          ),
+          Expanded(
+            child: Align(
+              alignment: Alignment.bottomCenter,
+              child: Container(
+                width: double.infinity,
+                height: height / 8,
+                child: Card(
+                  color: Colors.blue,
+                  child: IconButton(
+                    icon: Icon(
+                      Icons.add_box_outlined,
+                      color: Colors.white,
+                    ),
+                    onPressed: () {},
+                  ),
+                ),
               ),
             ),
-          ),
-          Center(
-              child: Container(
-                  width: 250,
-                  height: height / 8,
-                  child: Card(
-                    color: Colors.blue,
-                    child: IconButton(
-                      icon: Icon(
-                        Icons.add_box_outlined,
-                        color: Colors.white,
-                      ),
-                      onPressed: () {},
-                    ),
-                  )))
+          )
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(items: [

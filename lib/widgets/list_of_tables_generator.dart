@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lista_2/widgets/shopping_list_name_tab.dart';
 import 'package:provider/provider.dart';
 
 import '../helpers/db_helper.dart';
@@ -24,8 +25,12 @@ class TableNames extends StatelessWidget {
             List<String> listoftables = snapshot.data as List<String>;
             return ListView.builder(
               itemCount: listoftables.length,
-              itemBuilder: (context, index) =>
-                  Card(child: Text(listoftables[index])),
+              itemBuilder: (context, index) => Card(
+                color: Colors.blue,
+                child: ShoppingListNameTab(
+                    listName: listoftables[index].toString(),
+                    listId: (index + 1).toString()),
+              ),
             );
         }
         // unreachable
