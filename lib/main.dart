@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lista_2/providers/default_items_provider.dart';
 import 'package:lista_2/providers/items_provider.dart';
+import 'package:lista_2/screens/main_screen_page.dart';
 import 'package:provider/provider.dart';
 
 import './helpers/db_helper.dart';
@@ -26,7 +27,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       initialRoute: '/',
       routes: {
-        '/': (ctx) => ListScreen(),
+        '/': (ctx) => MainScreenPage(),
+        MainScreenPage.routeName: (context) => MainScreenPage(),
         ShoppingListScreen.routeName: (ctx) => ShoppingListScreen(),
         CreateNewListScreen.routeName: (ctx) => CreateNewListScreen(),
       },
