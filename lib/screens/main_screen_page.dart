@@ -1,15 +1,35 @@
 import 'package:flutter/material.dart';
-import 'package:lista_2/widgets/list_of_tables_generator.dart';
+import 'package:provider/provider.dart';
 
-class MainScreenPage extends StatelessWidget {
+import 'package:lista_2/widgets/list_of_tables_generator.dart';
+import '../helpers/db_helper.dart';
+
+class MainScreenPage extends StatefulWidget {
   const MainScreenPage({Key? key}) : super(key: key);
   static const routeName = '/main_screen_page';
 
   @override
+  State<MainScreenPage> createState() => _MainScreenPageState();
+}
+
+class _MainScreenPageState extends State<MainScreenPage> {
+  bool isClicked = true;
+  void addTableSwitch() {
+    setState(() {
+      isClicked = !isClicked;
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
+    TextEditingController tableNameController = TextEditingController();
+    var dbProvider = Provider.of<DbHelper>(
+      context,
+    );
     var screenSize = MediaQuery.of(context).size;
     var width = screenSize.width;
     var height = screenSize.height;
+
     return Scaffold(
       appBar: AppBar(
         title: Text('appbar'),
@@ -29,24 +49,27 @@ class MainScreenPage extends StatelessWidget {
             height: 20,
           ),
           Expanded(
-            child: Align(
-              alignment: Alignment.bottomCenter,
-              child: Container(
-                width: double.infinity,
-                height: height / 8,
-                child: Card(
-                  color: Colors.blue,
-                  child: IconButton(
-                    icon: Icon(
-                      Icons.add_box_outlined,
-                      color: Colors.white,
+              child: Align(
+            alignment: Alignment.bottomCenter,
+            child: Container(
+              width: double.infinity,
+              height: height / 8,
+              child: isClicked
+                  ? Card(
+                      color: Colors.blue,
+                      child: IconButton(
+                          icon: Icon(
+                            Icons.add_box_outlined,
+                            color: Colors.white,
+                          ),
+                          onPressed: addTableSwitch))
+                  : TextField(
+                      decoration: InputDecoration(
+                          iconColor: Colors.white, labelText: 'Wprowadź nazwę'),
+                      controller: tableNameController,
                     ),
-                    onPressed: () {},
-                  ),
-                ),
-              ),
             ),
-          )
+          ))
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(items: [

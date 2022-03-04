@@ -83,6 +83,7 @@ $columnType TEXT
     db!.execute(
       'CREATE TABLE $newTableName($columnId INTEGER PRIMARY KEY, $columnName TEXT NOT NULL, $coumnQuantity INTEGER, $columnWeight REAL, $columnType TEXT)',
     );
+    notifyListeners();
   }
 
   Future<void> delete(int id) async {
@@ -92,9 +93,10 @@ $columnType TEXT
     notifyListeners();
   }
 
-  Future<void> dropTable() async {
+  Future<void> dropTable(String tableToDropName) async {
     Database? db = await instance.database;
-    return await db!.execute('DROP TABLE IF EXISTS $_tableName');
+    await db!.execute('DROP TABLE IF EXISTS $tableToDropName');
+    notifyListeners();
   }
 
   Future<void> createTable() async {

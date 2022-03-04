@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../helpers/db_helper.dart';
 
 class ShoppingListNameTab extends StatelessWidget {
   const ShoppingListNameTab(
@@ -10,13 +13,19 @@ class ShoppingListNameTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var dbprovider = Provider.of<DbHelper>(
+      context,
+    );
     var screenSize = MediaQuery.of(context).size;
     var width = screenSize.width;
     var height = screenSize.height;
     return Row(
       children: [
-        CircleAvatar(
-          child: Text(listId),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: CircleAvatar(
+            child: Text(listId),
+          ),
         ),
         Expanded(
           child: TextButton(
@@ -27,7 +36,9 @@ class ShoppingListNameTab extends StatelessWidget {
             onPressed: () {},
           ),
         ),
-        IconButton(onPressed: () {}, icon: Icon(Icons.delete))
+        IconButton(
+            onPressed: () => dbprovider.dropTable(listName as String),
+            icon: Icon(Icons.delete))
       ],
     );
   }
