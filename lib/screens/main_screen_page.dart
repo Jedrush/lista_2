@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:intl/intl.dart';
 
 import 'package:lista_2/widgets/list_of_tables_generator.dart';
 import '../helpers/db_helper.dart';
@@ -13,16 +14,20 @@ class MainScreenPage extends StatefulWidget {
 }
 
 class _MainScreenPageState extends State<MainScreenPage> {
-  bool isClicked = true;
+  bool isClicked = false;
   void addTableSwitch() {
     setState(() {
       isClicked = !isClicked;
     });
   }
 
+  String now = DateFormat("yyyy-MM-dd hh:mm:ss").format(DateTime.now());
+  TextEditingController tableNameController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
-    TextEditingController tableNameController = TextEditingController();
+    // tableNameController.text = now;
+
     var dbProvider = Provider.of<DbHelper>(
       context,
     );
@@ -62,7 +67,7 @@ class _MainScreenPageState extends State<MainScreenPage> {
                             Icons.add_box_outlined,
                             color: Colors.white,
                           ),
-                          onPressed: addTableSwitch))
+                          onPressed: () => addTableSwitch()))
                   : TextField(
                       decoration: InputDecoration(
                           iconColor: Colors.white, labelText: 'Wprowadź nazwę'),
