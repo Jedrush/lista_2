@@ -14,19 +14,24 @@ class MainScreenPage extends StatefulWidget {
 }
 
 class _MainScreenPageState extends State<MainScreenPage> {
-  bool isClicked = false;
+  bool isClicked = true;
   void addTableSwitch() {
     setState(() {
       isClicked = !isClicked;
     });
   }
 
-  String now = DateFormat("yyyy-MM-dd hh:mm:ss").format(DateTime.now());
+  String now =
+      'lista z: ' + DateFormat("dd-MM-yy hh:mm").format(DateTime.now());
   TextEditingController tableNameController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    // tableNameController.text = now;
+    initState() {
+      super.initState();
+    }
+
+    tableNameController.text = now;
 
     var dbProvider = Provider.of<DbHelper>(
       context,
@@ -69,8 +74,15 @@ class _MainScreenPageState extends State<MainScreenPage> {
                           ),
                           onPressed: () => addTableSwitch()))
                   : TextField(
+                      textInputAction: TextInputAction.done,
                       decoration: InputDecoration(
-                          iconColor: Colors.white, labelText: 'Wprowadź nazwę'),
+                        suffixIcon: IconButton(
+                          icon: Icon(Icons.add),
+                          onPressed: addTableSwitch,
+                        ),
+                        iconColor: Colors.white,
+                        labelText: 'Wprowadź nazwę',
+                      ),
                       controller: tableNameController,
                     ),
             ),
