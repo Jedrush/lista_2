@@ -95,7 +95,10 @@ $columnType TEXT
 
   Future<void> dropTable(String tableToDropName) async {
     Database? db = await instance.database;
-    await db!.execute('DROP TABLE IF EXISTS $tableToDropName');
+    if (db == null) {
+      return;
+    }
+    await db.execute('DROP TABLE IF EXISTS $tableToDropName');
     notifyListeners();
   }
 
@@ -192,5 +195,10 @@ $columnType TEXT
 
   List<String> get tableNames {
     return _tablesNames;
+  }
+
+  String userTableNameToSQL(String userInputName) {
+    // userInputName.replaceAll(from, replace);
+    return userInputName.replaceAllMapped(' ', (match) => '_');
   }
 }
